@@ -3,13 +3,9 @@ import styled from 'styled-components';
 
 const List = styled.div`
   .swiper {
-    overflow: visible;
-
     height: 216px;
 
     @media screen and (min-width: 768px) {
-      overflow: hidden;
-
       height: 232px;
     }
   }
