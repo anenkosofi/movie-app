@@ -2,6 +2,10 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const List = styled.div`
+  .swiper {
+    overflow: visible;
+  }
+
   .swiper-slide {
     width: 300px;
   }

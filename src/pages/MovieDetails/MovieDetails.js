@@ -89,6 +89,7 @@ export const MovieDetails = ({ type }) => {
           </ButtonWrapper>
         </MovieInfo>
       </MovieContent>
+      <Container></Container>
     </Details>
   );
 };

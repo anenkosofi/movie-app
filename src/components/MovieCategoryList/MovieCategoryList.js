@@ -12,7 +12,7 @@ import defaultPicture from '../../images/placeholder-home.jpg';
 export const MovieCategoryList = ({ items, type }) => {
   return (
     <List>
-      <Swiper grabCursor={true} spaceBetween={10} slidesPerView={'auto'}>
+      <Swiper spaceBetween={12} slidesPerView={4}>
         {items.map(({ id, backdrop_path, title, name }) => (
           <SwiperSlide key={id}>
             <ListItem>
