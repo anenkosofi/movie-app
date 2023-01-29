@@ -3,14 +3,15 @@ import styled from 'styled-components';
 
 const Details = styled.section`
   position: relative;
-`;
-
-const Banner = styled.div`
-  position: relative;
+  padding: 68px 0;
   height: 100vh;
-  background-position: center;
+  background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
+
+  @media screen and (min-width: 768px) {
+    padding: 164px 0;
+  }
 
   &:before {
     content: '';
@@ -46,19 +47,29 @@ const Container = styled.div`
 `;
 
 const MovieContent = styled.div`
-  position: absolute;
-  top: 10%;
-  left: 0;
+  position: relative;
   display: flex;
-  align-items: flex-end;
-  padding: 36px 48px;
-  gap: 36px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    gap: 36px;
+  }
 `;
 
 const NavItem = styled(NavLink)`
   position: absolute;
-  top: -60px;
-  left: 48px;
+  top: -62px;
+  left: 20px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -70,15 +81,17 @@ const NavItem = styled(NavLink)`
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  span {
-    display: none;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
   }
 
-  @media screen and (min-width: 768px) {
-    span {
-      display: inline-flex;
+  span {
+    display: none;
 
-      font-size: 16px;
+    @media screen and (min-width: 768px) {
+      span {
+        display: inline-flex;
+      }
     }
   }
 
@@ -89,55 +102,98 @@ const NavItem = styled(NavLink)`
 `;
 
 const Poster = styled.img`
-  width: 320px;
-  object-fit: contain;
+  width: 300px;
+  object-fit: cover;
 
   border-radius: 4px;
+
+  @media screen and (min-width: 768px) {
+    width: 268px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 320px;
+  }
 `;
 
 const MovieInfo = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 24px;
 
-  width: 860px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  p {
+    font-size: 16px;
+
+    @media screen and (min-width: 1280px) {
+      font-size: 20px;
+    }
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 64px;
+  font-size: 36px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 42px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 64px;
+  }
 `;
 
 const Genres = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  column-gap: 12px;
+  row-gap: 8px;
 
   span {
-    padding: 8px 24px;
-
-    font-size: 16px;
+    padding: 4px 8px;
+    font-size: 12px;
     background-color: #212121;
 
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 30px;
+
+    @media screen and (min-width: 768px) {
+    }
+    @media screen and (min-width: 1280px) {
+      padding: 8px 24px;
+      font-size: 16px;
+
+      border-width: 2px;
+    }
   }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
+
+  @media screen and (min-width: 1280px) {
+    gap: 36px;
+  }
 
   button {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
 
-    font-size: 20px;
+    width: 134px;
+    height: 44px;
 
-    width: 210px;
-    height: 50px;
+    font-size: 16px;
 
     color: #1e1e1e;
     background-color: rgba(191, 191, 191, 0.5);
@@ -157,12 +213,22 @@ const ButtonWrapper = styled.div`
       background-color: #fce205;
       box-shadow: 0px 8px 12px -4px rgba(236, 151, 6, 0.32);
     }
+
+    @media screen and (min-width: 768px) {
+      width: 180px;
+      height: 50px;
+    }
+
+    @media screen and (min-width: 1280px) {
+      width: 210px;
+
+      font-size: 20px;
+    }
   }
 `;
 
 export {
   Details,
-  Banner,
   Container,
   MovieContent,
   NavItem,

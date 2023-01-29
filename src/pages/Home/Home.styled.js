@@ -20,7 +20,11 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+
+  @media screen and (min-width: 1280px) {
+    gap: 16px;
+  }
 `;
 
 const SectionWrapper = styled.div`

@@ -4,10 +4,14 @@ import styled from 'styled-components';
 const List = styled.div`
   .swiper {
     overflow: visible;
-  }
 
-  .swiper-slide {
-    width: 300px;
+    height: 216px;
+
+    @media screen and (min-width: 768px) {
+      overflow: hidden;
+
+      height: 232px;
+    }
   }
 `;
 
@@ -33,10 +37,6 @@ const MovieInfo = styled.div`
   padding: 12px 4px;
 
   text-align: center;
-
-  p {
-    font-size: 16px;
-  }
 `;
 
 export { List, ListItem, Item, Poster, MovieInfo };
