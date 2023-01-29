@@ -26,8 +26,8 @@ const ListItem = styled.li`
   flex-direction: column;
   width: 280px;
 
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   @media screen and (min-width: 768px) {
     flex-basis: calc((100% - 16px) / 3);
@@ -38,8 +38,8 @@ const ListItem = styled.li`
 
   &:hover:not(.active),
   &:focus-visible:not(.active) {
-    transform: scale(1.1);
     color: #ec9706;
+    transform: scale(1.1);
   }
 `;
 

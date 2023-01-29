@@ -5,7 +5,7 @@ import { MovieList } from 'components/MovieList';
 import { LoadMoreButton } from 'components/LoadMoreButton';
 import { MoviesWrapper, Container, InnerWrapper } from './Movies.styled';
 
-export const Movies = () => {
+export const Movies = ({ type }) => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
@@ -43,7 +43,7 @@ export const Movies = () => {
         <InnerWrapper>
           <h1>Trending today</h1>
           <SearchBar onSubmit={submitHandler} />
-          <MovieList items={movies} />
+          <MovieList items={movies} type={type} />
           {movies.length < total && (
             <LoadMoreButton onClick={loadMoreHandler} />
           )}
