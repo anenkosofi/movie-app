@@ -82,6 +82,50 @@ const getTVSeriesById = async id => {
   }
 };
 
+const getPopularMovies = async () => {
+  try {
+    const response = await axios.get('/movie/popular', {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getTopRatedMovies = async () => {
+  try {
+    const response = await axios.get('/movie/top_rated', {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getPopularTVSeries = async () => {
+  try {
+    const response = await axios.get('/tv/popular', {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getTopRatedTVSeries = async () => {
+  try {
+    const response = await axios.get('/tv/top_rated', {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   getTrendingMovies,
   getMovieByQuery,
@@ -90,4 +134,8 @@ export {
   getTrendingTVSeries,
   getTVSeriesByQuery,
   getTVSeriesById,
+  getPopularMovies,
+  getTopRatedMovies,
+  getPopularTVSeries,
+  getTopRatedTVSeries,
 };

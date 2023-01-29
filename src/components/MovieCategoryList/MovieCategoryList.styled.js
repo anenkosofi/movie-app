@@ -1,0 +1,38 @@
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+
+const List = styled.div`
+  .swiper-slide {
+    width: 300px;
+  }
+`;
+
+const ListItem = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Item = styled(NavLink)`
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover:not(.active),
+  &:focus-visible:not(.active) {
+    color: #ec9706;
+  }
+`;
+
+const Poster = styled.img`
+  object-fit: cover;
+`;
+
+const MovieInfo = styled.div`
+  padding: 12px 4px;
+
+  text-align: center;
+
+  p {
+    font-size: 16px;
+  }
+`;
+
+export { List, ListItem, Item, Poster, MovieInfo };

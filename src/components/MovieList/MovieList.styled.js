@@ -26,26 +26,23 @@ const ListItem = styled.li`
   flex-direction: column;
   width: 280px;
 
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
   @media screen and (min-width: 768px) {
     flex-basis: calc((100% - 16px) / 3);
   }
   @media screen and (min-width: 1280px) {
     flex-basis: calc((100% - 32px) / 5);
   }
+`;
+
+const Item = styled(NavLink)`
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover:not(.active),
   &:focus-visible:not(.active) {
     color: #ec9706;
     transform: scale(1.1);
   }
-`;
-
-const Item = styled(NavLink)`
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const Poster = styled.img`
