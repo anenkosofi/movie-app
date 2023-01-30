@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Details = styled.section`
@@ -54,6 +53,7 @@ const MovieContent = styled.div`
   align-items: center;
   gap: 16px;
 
+  padding: 16px 0;
   width: 100%;
 
   @media screen and (min-width: 768px) {
@@ -63,41 +63,6 @@ const MovieContent = styled.div`
 
   @media screen and (min-width: 1280px) {
     gap: 36px;
-  }
-`;
-
-const NavItem = styled(NavLink)`
-  position: absolute;
-  top: -62px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-
-  padding: 12px 12px;
-
-  border-radius: 4px;
-
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  @media screen and (min-width: 768px) {
-    font-size: 16px;
-  }
-
-  span {
-    display: none;
-
-    @media screen and (min-width: 768px) {
-      span {
-        display: inline-flex;
-      }
-    }
-  }
-
-  &.active {
-    color: #1e1e1e;
-    background-color: rgba(191, 191, 191, 0.5);
   }
 `;
 
@@ -227,14 +192,29 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+const SimilarMovieContent = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 16px 0;
+
+  font-size: 16px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+  }
+`;
+
 export {
   Details,
   Container,
   MovieContent,
-  NavItem,
   Poster,
   MovieInfo,
   Title,
   Genres,
   ButtonWrapper,
+  SimilarMovieContent,
 };

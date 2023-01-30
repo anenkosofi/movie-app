@@ -25,8 +25,31 @@ const Container = styled.div`
 
 const Navigation = styled.div`
   display: flex;
-  justify-content: flex-end;
-  gap: 16px;
+  justify-content: space-between;
+
+  nav {
+    display: flex;
+    gap: 4px;
+  }
+`;
+
+const StyledLogo = styled(NavLink)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 12px;
+
+  border-radius: 4px;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover:not(.active),
+  &:focus-visible:not(.active) {
+    color: #1e1e1e;
+    background-color: rgba(191, 191, 191, 0.5);
+  }
 `;
 
 const StyledLink = styled(NavLink)`
@@ -63,4 +86,4 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-export { Bar, Container, Navigation, StyledLink };
+export { Bar, Container, Navigation, StyledLogo, StyledLink };

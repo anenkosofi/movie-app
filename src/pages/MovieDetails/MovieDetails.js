@@ -1,28 +1,34 @@
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   MdOutlinePlaylistAdd,
   MdOutlinePlaylistAddCheck,
 } from 'react-icons/md';
-import { HiOutlineArrowCircleLeft } from 'react-icons/hi';
-import { getMovieById, getTVSeriesById } from 'services/tmdbApi';
+import {
+  getMovieById,
+  getTVSeriesById,
+  getSimilarMovies,
+} from 'services/tmdbApi';
+import { MovieCategoryList } from 'components/MovieCategoryList';
 import {
   Details,
   Container,
   MovieContent,
-  NavItem,
   Poster,
   MovieInfo,
   Title,
   Genres,
   ButtonWrapper,
+  SimilarMovieContent,
 } from './MovieDetails.styled';
 import defaultPicture from '../../images/placeholder.jpg';
 
 export const MovieDetails = ({ type }) => {
-  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  const location = useLocation();
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [watchList, setWatchList] = useState([]);
+  const [watched, setWatched] = useState([]);
+  const { movieId } = useParams();
 
   useEffect(() => {
     switch (type) {
@@ -39,12 +45,70 @@ export const MovieDetails = ({ type }) => {
     }
   }, [movieId, type]);
 
+  useEffect(() => {
+    getSimilarMovies(movieId).then(({ results }) => setSimilarMovies(results));
+  }, [movieId]);
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem('watchList'));
+    if (!savedData) {
+      localStorage.setItem('watchList', JSON.stringify(watchList));
+    } else {
+      localStorage.setItem(
+        'watchList',
+        JSON.stringify([...savedData, ...watchList])
+      );
+    }
+  }, [watchList]);
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem('watched'));
+    if (!savedData) {
+      localStorage.setItem('watched', JSON.stringify(watched));
+    } else {
+      localStorage.setItem(
+        'watched',
+        JSON.stringify([...savedData, ...watched])
+      );
+    }
+  }, [watched]);
+
+  const setMovieToLocalStorage = ({ name, id, type }) => {
+    switch (name) {
+      case 'watchList':
+        if (type === 'movies') {
+          getMovieById(id).then(movie =>
+            setWatchList(prevState => [...prevState, movie])
+          );
+        } else if (type === 'tv') {
+          getTVSeriesById(id).then(movie =>
+            setWatchList(prevState => [...prevState, movie])
+          );
+        }
+        break;
+
+      case 'watched':
+        if (type === 'movies') {
+          getMovieById(id).then(movie =>
+            setWatched(prevState => [...prevState, movie])
+          );
+        } else if (type === 'tv') {
+          getTVSeriesById(id).then(movie =>
+            setWatched(prevState => [...prevState, movie])
+          );
+        }
+        break;
+
+      default:
+        return;
+    }
+  };
+
   if (!movie) {
     return;
   }
-  const { backdrop_path, genres, overview, poster_path, name, title } = movie;
-
-  const backLinkHref = location.state?.from ?? '/';
+  const { id, backdrop_path, genres, overview, poster_path, name, title } =
+    movie;
 
   return (
     <Details
@@ -55,10 +119,6 @@ export const MovieDetails = ({ type }) => {
       }}
     >
       <Container>
-        <NavItem to={backLinkHref}>
-          <HiOutlineArrowCircleLeft size={24} />
-          <span>Go back</span>
-        </NavItem>
         <MovieContent>
           <Poster
             src={
@@ -77,17 +137,31 @@ export const MovieDetails = ({ type }) => {
             </Genres>
             <p>{overview}</p>
             <ButtonWrapper>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() =>
+                  setMovieToLocalStorage({ name: 'watchList', id, type })
+                }
+              >
                 <MdOutlinePlaylistAdd size={24} />
-                <span>Add to wishlist</span>
+                <span>Add to watchlist</span>
               </button>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() =>
+                  setMovieToLocalStorage({ name: 'watched', id, type })
+                }
+              >
                 <MdOutlinePlaylistAddCheck size={24} />
                 <span>Mark as watched</span>
               </button>
             </ButtonWrapper>
           </MovieInfo>
         </MovieContent>
+        <SimilarMovieContent>
+          <h2>You might also like</h2>
+          <MovieCategoryList items={similarMovies} type={type} />
+        </SimilarMovieContent>
       </Container>
     </Details>
   );

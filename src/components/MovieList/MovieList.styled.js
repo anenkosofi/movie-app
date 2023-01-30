@@ -14,6 +14,8 @@ const List = styled.ul`
     justify-content: flex-start;
     row-gap: 24px;
     column-gap: 8px;
+
+    margin: 0;
   }
 
   @media screen and (min-width: 1280px) {

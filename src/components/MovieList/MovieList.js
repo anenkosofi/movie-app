@@ -1,15 +1,12 @@
-import { useLocation } from 'react-router-dom';
 import { List, ListItem, Item, Poster, MovieInfo } from './MovieList.styled';
 import defaultPicture from '../../images/placeholder.jpg';
 
 export const MovieList = ({ items, type }) => {
-  const location = useLocation();
-
   return (
     <List>
       {items.map(({ id, poster_path, title }) => (
         <ListItem key={id}>
-          <Item to={`/${type}/${id}`} state={{ from: location }}>
+          <Item to={`/${type}/${id}`}>
             <Poster
               src={
                 poster_path

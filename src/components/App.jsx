@@ -4,6 +4,7 @@ import { SharedLayout } from './SharedLayout';
 import { Home } from 'pages/Home';
 import { Movies } from 'pages/Movies';
 import { TVSeries } from 'pages/TVSeries';
+import { Library } from 'pages/Library';
 import { MovieDetails } from 'pages/MovieDetails';
 
 export const App = () => {
@@ -25,6 +26,12 @@ export const App = () => {
           />
           <Route path="tv" element={<TVSeries type="tv" />} />
           <Route path="tv/:movieId" element={<MovieDetails type="tv" />} />
+          <Route path="library" element={<Library />} />
+          <Route
+            path="library/:movieId"
+            element={<MovieDetails type="movies" />}
+          />
+          <Route path="library/:movieId" element={<MovieDetails type="tv" />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
