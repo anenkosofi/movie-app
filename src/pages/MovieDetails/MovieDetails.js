@@ -23,7 +23,7 @@ import {
 } from './MovieDetails.styled';
 import defaultPicture from '../../images/placeholder.jpg';
 
-export const MovieDetails = ({ type }) => {
+export const MovieDetails = ({ type, category }) => {
   const [movie, setMovie] = useState(null);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [watchList, setWatchList] = useState([]);
@@ -40,10 +40,18 @@ export const MovieDetails = ({ type }) => {
         getTVSeriesById(movieId).then(setMovie);
         break;
 
+      case 'library':
+        if (category === 'movies') {
+          getMovieById(movieId).then(setMovie);
+        } else if (category === 'tv') {
+          getTVSeriesById(movieId).then(setMovie);
+        }
+        break;
+
       default:
         return;
     }
-  }, [movieId, type]);
+  }, [movieId, type, category]);
 
   useEffect(() => {
     getSimilarMovies(movieId).then(({ results }) => setSimilarMovies(results));

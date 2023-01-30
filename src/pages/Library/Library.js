@@ -8,7 +8,7 @@ import {
   ButtonWrapper,
 } from './Library.styled';
 
-export const Library = () => {
+export const Library = ({ type }) => {
   const [watchList] = useState(() => {
     return JSON.parse(localStorage.getItem('watchList')) ?? [];
   });
@@ -42,7 +42,7 @@ export const Library = () => {
               onClick={() => chooseMovieListToShow('watchList')}
             >
               <RiFileListLine size={24} />
-              <span>Watchlist</span>
+              <span>Queue</span>
             </button>
             <button
               type="button"
@@ -52,7 +52,7 @@ export const Library = () => {
               <span>Watched</span>
             </button>
           </ButtonWrapper>
-          <MovieList items={movies} />
+          <MovieList items={movies} type={type} />
         </InnerWrapper>
       </Container>
     </MoviesWrapper>

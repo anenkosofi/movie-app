@@ -26,12 +26,15 @@ export const App = () => {
           />
           <Route path="tv" element={<TVSeries type="tv" />} />
           <Route path="tv/:movieId" element={<MovieDetails type="tv" />} />
-          <Route path="library" element={<Library />} />
+          <Route path="library" element={<Library type="library" />} />
           <Route
             path="library/:movieId"
-            element={<MovieDetails type="movies" />}
+            element={<MovieDetails type="library" category="movies" />}
           />
-          <Route path="library/:movieId" element={<MovieDetails type="tv" />} />
+          <Route
+            path="library/:movieId"
+            element={<MovieDetails type="library" category="tv" />}
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
