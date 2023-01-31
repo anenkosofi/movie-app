@@ -4,7 +4,7 @@ import defaultPicture from '../../images/placeholder.jpg';
 export const MovieList = ({ items, type }) => {
   return (
     <List>
-      {items.map(({ id, poster_path, title }) => (
+      {items.map(({ id, poster_path, title, name }) => (
         <ListItem key={id}>
           <Item to={`/${type}/${id}`}>
             <Poster
@@ -13,10 +13,10 @@ export const MovieList = ({ items, type }) => {
                   ? `https://image.tmdb.org/t/p/w500${poster_path}`
                   : defaultPicture
               }
-              alt={title}
+              alt={title || name}
             />
             <MovieInfo>
-              <p>{title}</p>
+              <p>{title || name}</p>
             </MovieInfo>
           </Item>
         </ListItem>

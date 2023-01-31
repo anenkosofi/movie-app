@@ -1,15 +1,22 @@
 import styled from 'styled-components';
 
-const List = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+const List = styled.div`
+  .swiper {
+    height: 216px;
 
-  li {
-    flex-basis: calc((100% - 4 * 16px) / 5);
+    @media screen and (min-width: 768px) {
+      height: 232px;
+    }
   }
+`;
+
+const ListItem = styled.div`
+  display: flex;
+  flex-direction: column;
 
   img {
+    width: 120px;
+    height: 180px;
     object-fit: cover;
 
     border-radius: 4px;
@@ -30,4 +37,4 @@ const Character = styled.p`
   color: #808080;
 `;
 
-export { List, Character };
+export { List, ListItem, Character };

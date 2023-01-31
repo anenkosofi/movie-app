@@ -192,7 +192,7 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const SimilarMovieContent = styled.div`
+const AdditionalMovieContent = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -216,5 +216,5 @@ export {
   Title,
   Genres,
   ButtonWrapper,
-  SimilarMovieContent,
+  AdditionalMovieContent,
 };

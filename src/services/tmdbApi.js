@@ -49,6 +49,17 @@ const getMovieCast = async id => {
   }
 };
 
+const getTVSeriesCast = async id => {
+  try {
+    const response = await axios.get(`/tv/${id}/credits`, {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getTrendingTVSeries = async () => {
   try {
     const response = await axios.get('/trending/tv/day', {
@@ -137,9 +148,31 @@ const getSimilarMovies = async id => {
   }
 };
 
+const getSimilarTVSeries = async id => {
+  try {
+    const response = await axios.get(`/tv/${id}/similar`, {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getMovieVideos = async id => {
   try {
     const response = await axios.get(`/movie/${id}/videos`, {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getTVSeriesVideos = async id => {
+  try {
+    const response = await axios.get(`/tv/${id}/videos`, {
       params: { api_key: API_KEY },
     });
     return response.data;
@@ -153,6 +186,7 @@ export {
   getMovieByQuery,
   getMovieById,
   getMovieCast,
+  getTVSeriesCast,
   getTrendingTVSeries,
   getTVSeriesByQuery,
   getTVSeriesById,
@@ -161,5 +195,7 @@ export {
   getPopularTVSeries,
   getTopRatedTVSeries,
   getSimilarMovies,
+  getSimilarTVSeries,
   getMovieVideos,
+  getTVSeriesVideos,
 };

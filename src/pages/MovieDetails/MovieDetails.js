@@ -8,8 +8,11 @@ import {
   getMovieById,
   getTVSeriesById,
   getSimilarMovies,
+  getSimilarTVSeries,
 } from 'services/tmdbApi';
 import { MovieCategoryList } from 'components/MovieCategoryList';
+import { Cast } from 'components/Cast';
+import { Trailer } from 'components/Trailer';
 import {
   Details,
   Container,
@@ -19,15 +22,19 @@ import {
   Title,
   Genres,
   ButtonWrapper,
-  SimilarMovieContent,
+  AdditionalMovieContent,
 } from './MovieDetails.styled';
 import defaultPicture from '../../images/placeholder.jpg';
 
 export const MovieDetails = ({ type, category }) => {
   const [movie, setMovie] = useState(null);
   const [similarMovies, setSimilarMovies] = useState([]);
-  const [watchList, setWatchList] = useState([]);
-  const [watched, setWatched] = useState([]);
+  const [watchList, setWatchList] = useState(() => {
+    return JSON.parse(localStorage.getItem('watchList')) ?? [];
+  });
+  const [watched, setWatched] = useState(() => {
+    return JSON.parse(localStorage.getItem('watched')) ?? [];
+  });
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -54,36 +61,41 @@ export const MovieDetails = ({ type, category }) => {
   }, [movieId, type, category]);
 
   useEffect(() => {
-    getSimilarMovies(movieId).then(({ results }) => setSimilarMovies(results));
-  }, [movieId]);
+    switch (type) {
+      case 'movies':
+        getSimilarMovies(movieId).then(({ results }) =>
+          setSimilarMovies(results)
+        );
+        break;
+
+      case 'tv':
+        getSimilarTVSeries(movieId).then(({ results }) =>
+          setSimilarMovies(results)
+        );
+        break;
+
+      default:
+        return;
+    }
+  }, [movieId, type]);
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem('watchList'));
-    if (!savedData) {
-      localStorage.setItem('watchList', JSON.stringify(watchList));
-    } else {
-      localStorage.setItem(
-        'watchList',
-        JSON.stringify([...savedData, ...watchList])
-      );
-    }
+    localStorage.setItem('watchList', JSON.stringify(watchList));
   }, [watchList]);
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem('watched'));
-    if (!savedData) {
-      localStorage.setItem('watched', JSON.stringify(watched));
-    } else {
-      localStorage.setItem(
-        'watched',
-        JSON.stringify([...savedData, ...watched])
-      );
-    }
+    localStorage.setItem('watched', JSON.stringify(watched));
   }, [watched]);
 
   const setMovieToLocalStorage = ({ name, id, type }) => {
     switch (name) {
       case 'watchList':
+        if (watchList.find(({ id: movieId }) => movieId === id)) {
+          setWatchList(prevState =>
+            prevState.filter(({ id: movieId }) => movieId !== id)
+          );
+          return;
+        }
         if (type === 'movies') {
           getMovieById(id).then(movie =>
             setWatchList(prevState => [...prevState, movie])
@@ -96,6 +108,12 @@ export const MovieDetails = ({ type, category }) => {
         break;
 
       case 'watched':
+        if ([...watched].find(({ id: movieId }) => movieId === id)) {
+          setWatched(prevState =>
+            prevState.filter(({ id: movieId }) => movieId !== id)
+          );
+          return;
+        }
         if (type === 'movies') {
           getMovieById(id).then(movie =>
             setWatched(prevState => [...prevState, movie])
@@ -152,7 +170,11 @@ export const MovieDetails = ({ type, category }) => {
                 }
               >
                 <MdOutlinePlaylistAdd size={24} />
-                <span>Add to watchlist</span>
+                <span>
+                  {[...watchList].find(({ id: movieId }) => movieId === id)
+                    ? 'Remove from queue'
+                    : 'Add to queue'}
+                </span>
               </button>
               <button
                 type="button"
@@ -161,15 +183,27 @@ export const MovieDetails = ({ type, category }) => {
                 }
               >
                 <MdOutlinePlaylistAddCheck size={24} />
-                <span>Mark as watched</span>
+                <span>
+                  {[...watched].find(({ id: movieId }) => movieId === id)
+                    ? 'Remove from watched'
+                    : 'Add to watched'}
+                </span>
               </button>
             </ButtonWrapper>
           </MovieInfo>
         </MovieContent>
-        <SimilarMovieContent>
+        <AdditionalMovieContent>
+          <h2>Videos</h2>
+          <Trailer id={id} type={type} />
+        </AdditionalMovieContent>
+        <AdditionalMovieContent>
+          <h2>Cast</h2>
+          <Cast id={id} type={type} />
+        </AdditionalMovieContent>
+        <AdditionalMovieContent>
           <h2>You might also like</h2>
           <MovieCategoryList items={similarMovies} type={type} />
-        </SimilarMovieContent>
+        </AdditionalMovieContent>
       </Container>
     </Details>
   );

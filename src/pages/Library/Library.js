@@ -15,7 +15,14 @@ export const Library = ({ type }) => {
   const [watched] = useState(() => {
     return JSON.parse(localStorage.getItem('watched')) ?? [];
   });
-  const [movies, setMovies] = useState([...watchList, ...watched]);
+  const allMoviesId = [...watchList, ...watched].map(({ id }) => id);
+  const uniqueMoviesId = allMoviesId.filter(
+    (id, index, array) => array.indexOf(id) === index
+  );
+  const uniqueMovies = uniqueMoviesId.map(id => {
+    return [...watchList, ...watched].find(movie => movie.id === id);
+  });
+  const [movies, setMovies] = useState(uniqueMovies);
 
   const chooseMovieListToShow = name => {
     switch (name) {
@@ -28,7 +35,7 @@ export const Library = ({ type }) => {
         break;
 
       default:
-        setMovies([...watchList, ...watched]);
+        return;
     }
   };
 
