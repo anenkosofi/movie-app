@@ -1,12 +1,13 @@
+import { Hero } from 'components/Hero';
 import { MovieListSection } from 'components/MovieListSection';
 import { Container, Wrapper, SectionWrapper } from './Home.styled';
 
 export const Home = () => {
   return (
     <main>
+      <Hero />
       <Container>
         <Wrapper>
-          <div>Slider</div>
           <SectionWrapper>
             <MovieListSection category="popularMovies" />
             <MovieListSection category="topRatedMovies" />

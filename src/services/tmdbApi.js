@@ -181,6 +181,17 @@ const getTVSeriesVideos = async id => {
   }
 };
 
+const getNowPlayingMovies = async () => {
+  try {
+    const response = await axios.get(`/movie/now_playing`, {
+      params: { api_key: API_KEY },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   getTrendingMovies,
   getMovieByQuery,
@@ -198,4 +209,5 @@ export {
   getSimilarTVSeries,
   getMovieVideos,
   getTVSeriesVideos,
+  getNowPlayingMovies,
 };
