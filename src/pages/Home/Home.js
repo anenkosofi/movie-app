@@ -2,7 +2,7 @@ import { Hero } from 'components/Hero';
 import { MovieListSection } from 'components/MovieListSection';
 import { Container, Wrapper, SectionWrapper } from './Home.styled';
 
-export const Home = () => {
+const Home = () => {
   return (
     <main>
       <Hero />
@@ -19,3 +19,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;

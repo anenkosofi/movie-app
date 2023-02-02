@@ -9,7 +9,7 @@ import {
   InnerWrapper,
 } from 'pages/Movies/Movies.styled';
 
-export const TVSeries = ({ type }) => {
+const TVSeries = ({ type }) => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [series, setSeries] = useState([]);
@@ -56,3 +56,5 @@ export const TVSeries = ({ type }) => {
     </MoviesWrapper>
   );
 };
+
+export default TVSeries;

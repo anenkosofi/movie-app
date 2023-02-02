@@ -1,1 +1,1 @@
-export { Library } from './Library';
+export { default } from './Library';

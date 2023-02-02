@@ -8,7 +8,7 @@ import {
   ButtonWrapper,
 } from './Library.styled';
 
-export const Library = ({ type }) => {
+const Library = ({ type }) => {
   const [watchList] = useState(() => {
     return JSON.parse(localStorage.getItem('watchList')) ?? [];
   });
@@ -65,3 +65,5 @@ export const Library = ({ type }) => {
     </MoviesWrapper>
   );
 };
+
+export default Library;

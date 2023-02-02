@@ -26,7 +26,7 @@ import {
 } from './MovieDetails.styled';
 import defaultPicture from '../../images/placeholder.jpg';
 
-export const MovieDetails = ({ type, category }) => {
+const MovieDetails = ({ type, category }) => {
   const [movie, setMovie] = useState(null);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [watchList, setWatchList] = useState(() => {
@@ -208,3 +208,5 @@ export const MovieDetails = ({ type, category }) => {
     </Details>
   );
 };
+
+export default MovieDetails;

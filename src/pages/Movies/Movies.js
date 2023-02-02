@@ -5,7 +5,7 @@ import { MovieList } from 'components/MovieList';
 import { LoadMoreButton } from 'components/LoadMoreButton';
 import { MoviesWrapper, Container, InnerWrapper } from './Movies.styled';
 
-export const Movies = ({ type }) => {
+const Movies = ({ type }) => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
@@ -52,3 +52,5 @@ export const Movies = ({ type }) => {
     </MoviesWrapper>
   );
 };
+
+export default Movies;
